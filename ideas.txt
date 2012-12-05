@@ -1,0 +1,42 @@
+==========================================
+Ideas for what is now called race car game
+  (maybe cause all it has is a race car)
+==========================================
+
+// IMPORTANT should i do this in javascript
+// might be better in UNITY 
+// javscript is good prototype
+
+1. make some sort of battle system or things to do on quests
+  - racing?
+  - what am i fighting?
+  - tie in with story
+
+2. put on git and use it 
+
+3. make it into an rpg like you always wanted
+  - make car a drivable item or dressing pattern for player
+  - make quests!
+    - shit im gonna need an easy way to make quests
+    - script system? xml?
+  - what is the reason the player is doing this
+
+4. make this thing a little more functional 
+  - maybe take out update method
+  - make player a set of values w/o functions
+  - make it event driven
+
+5. make a nice big map to drive around on
+  - procedurally generated?
+  - figure out how to draw part of the map
+  - figure out how notch did those texturess
+
+6. make a mother fucking story!!!!!
+  - fun and exciting
+  - must fit the art constraint
+    - get that art guy involved
+  - must grab you
+    - short intro with mystery and intregue
+    - one liner wtf
+
+
