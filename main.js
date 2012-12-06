@@ -11,61 +11,20 @@ function init() {
   canvas   = document.getElementById('canvas');
   graphics = canvas.getContext('2d');
   para     = document.getElementById('p');
+
   loadContent();
+
+  keysdown['right'] = false;
+  keysdown['left']  = false;
+  keysdown['up']    = false;
+  keysdown['brake'] = false;
+  keysdown['down']  = false;
   $(document).keydown( onkeydown ); 
   $(document).keyup( onkeyup );
-  $(document).keypress ( onkeypress );  
+  
   window.setInterval( loop , timeinterval ); 
   }  
-
-function onkeypress( e ) {
-  game['player'].onkeypress( e );
-  }
-
-function onkeyup( e ) {
-  if ( e.which == 119 ) { 
-    if ( -1 != $.inArray( 'up' , keysdown ) ) {
-      keysdown.pop( 'up' );
-      }
-    }
-  if ( e.which == 115 ) {
-    if ( -1 != $.inArray( 'down' , keysdown ) ) {
-      keysdown.pop( 'down' );
-      }
-    }
-  if ( e.which == 100 ) {
-    if ( -1 != $.inArray( 'right' , keysdown ) ) {
-      keysdown.pop( 'right' );
-      }
-    }
-  if ( e.which == 97 ) {
-    if ( -1 != $.inArray( 'left', keysdown ) ) {
-      keysdown.pop( 'left' );
-      }
-    }
-  }
-function onkeydown( e ) {
-   if ( e.which == 119 ) { 
-    if ( -1 == $.inArray( 'up' , keysdown ) ) {
-      keysdown.push( 'up' );
-      }
-    }
-  if ( e.which == 115 ) {
-    if ( -1 == $.inArray( 'down' , keysdown ) ) {
-      keysdown.push( 'down' );
-      }
-    }
-  if ( e.which == 100 ) {
-    if ( -1 == $.inArray( 'right' , keysdown ) ) {
-      keysdown.push( 'right' );
-      }
-    }
-  if ( e.which == 97 ) {
-    if ( -1 == $.inArray( 'left', keysdown ) ) {
-      keysdown.push( 'left' );
-      }
-    }
-  }
+  
 
 function loop() {
   update( timeinterval );
@@ -75,7 +34,10 @@ function loop() {
 
 function loadContent() {
   loadImage( 'player' , 'player.jpg' );
-  loadGObj( 'player' , ( new player() ).init( canvas.width / 2 , canvas.height / 2 , 100 , 50 ) ); 
+  loadGObj( 'player' , 
+  ( new player() )
+    .init( canvas.width / 2 , canvas.height / 2 ,
+      100 , 50 ) ); 
    
   
   }
@@ -87,9 +49,7 @@ function draw( game ,  gfx ) {
   }
 
 function update( ti ) {
-  for ( var os in game ) {
-    game[os].update( ti , keysdown );
-    }
+    game['player'].update( ti , keysdown ); 
   }
 
 function loadImage( indexname , path ) {
@@ -99,5 +59,31 @@ function loadImage( indexname , path ) {
 function loadGObj( indexname , obj ) {
   game[indexname] = obj;
   }
+
+function onkeyup( e ) {
+  if ( keysdown['right'] == true ) 
+    if ( e.which == 68  ) keysdown['right'] = false;
+  if ( keysdown['left'] == true ) 
+    if ( e.which == 65  ) keysdown['left']  = false;
+  if ( keysdown['up'] == true ) 
+    if ( e.which == 87  ) keysdown['up']    = false;
+  if ( keysdown['down'] == true ) 
+    if ( e.which == 83  ) keysdown['down']  = false;
+  if ( keysdown['brake'] == true ) 
+    if ( e.which == 81  ) keysdown['brake']  = false;
+  } 
+function onkeydown( e ) {
+  if ( keysdown['right'] == false )
+    if ( e.which == 68  ) keysdown['right'] = true;
+  if ( keysdown['left'] == false )
+    if ( e.which == 65  ) keysdown['left']  = true;
+  if ( keysdown['up'] == false ) 
+    if ( e.which == 87  ) keysdown['up']    = true;
+  if ( keysdown['down'] == false )
+    if ( e.which == 83  ) keysdown['down']  = true;
+  if ( keysdown['brake'] == false )
+    if ( e.which == 81  ) keysdown['brake']  = true;
+ 
+  } 
 
 
