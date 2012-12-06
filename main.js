@@ -21,7 +21,7 @@ function init() {
   keysdown['down']  = false;
   $(document).keydown( onkeydown ); 
   $(document).keyup( onkeyup );
-  
+  $("html").on( 'keydown' , function ( e ) { e.preventDefault() } ); 
   window.setInterval( loop , timeinterval ); 
   }  
   
@@ -34,6 +34,8 @@ function loop() {
 
 function loadContent() {
   loadImage( 'player' , 'player.jpg' );
+  loadImage( 'world'  , 'world.jpg'  );
+
   loadGObj( 'player' , 
   ( new player() )
     .init( canvas.width / 2 , canvas.height / 2 ,
@@ -43,7 +45,12 @@ function loadContent() {
   }
 
 function draw( game ,  gfx ) {
-  gfx.clearRect( 0 , 0 , canvas.width , canvas.height );  
+  gfx.clearRect( 0 , 0 , 
+    canvas.width , canvas.height );  
+  
+  gfx.drawImage( images['world'] , 200 , 200 , 800 , 600,  0 , 0 , canvas.width , canvas.height); 
+  
+  
   game['player'] .draw( images['player'] , gfx ); 
   
   }
