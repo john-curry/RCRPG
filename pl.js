@@ -34,25 +34,7 @@ function player() {
     };
 
   this.update = function( dt , kds ) {
-    
-    this.angle = Math.atan2( this.dy , this.dx );
-    
-    if ( kds['right'] ) 
-      this.ddx = 1;
-    if ( kds['left'] )
-      this.ddx = -1;
-    if ( kds['up'] )
-      this.ddy = -1;
-    if ( kds['down'] ) 
-      this.ddy = 1;
-    if ( kds['brake'] ) 
-      this.ddy = this.ddx = this.dx = this.dy = 0 
-    this.dy += this.ddy;
-    this.y  += this.dy;
-
-    this.dx += this.ddx;
-    this.x  += this.dx;
-
+    driving( this , kds );
     };
   
   this.init = function ( x , y , w , h ) {
@@ -60,9 +42,38 @@ function player() {
     this.y = y
     this.width = w
     this.height = h
-    return this;
+    return this; // why? because i can
     };     
   }
+
+function driving( pl , kds ) {
+  pl.angle = Math.atan2( pl.dy , pl. dx );
+    if ( kds['right'] ) 
+      pl.ddx = 1;
+    if ( kds['left'] )
+      pl.ddx = -1;
+
+    if ( !kds['right'] && !kds['left'] )
+      pl.ddx = 0;
+    if ( !kds['up'] && !kds['down'] )
+      pl.ddy = 0;
+
+    if ( kds['up'] )
+      pl.ddy = -1;
+    if ( kds['down'] ) 
+      pl.ddy = 1;
+
+    if ( kds['brake'] ) { 
+      pl.ddy = pl.ddx = pl.dx = pl.dy = 0 
+
+      }
+    pl.x += ( pl.dx += pl.ddx );
+    pl.y += ( pl.dy += pl.ddy );
+  
+
+
+  }
+
 player.prototype = GObj;
 
 
