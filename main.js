@@ -5,6 +5,8 @@ var images = [];
 var timeinterval = 100;
 var game = [];
 var keysdown = [];
+var aspectratio;   
+
 init();
 
 function init() {
@@ -24,8 +26,8 @@ function init() {
   $("html").on( 'keydown' , function ( e ) { e.preventDefault() } ); 
   window.setInterval( loop , timeinterval ); 
   }  
-  
-
+  aspectratio = canvas.height / canvas.width;
+  // height = aspect * width
 function loop() {
   update( timeinterval );
   draw( game , graphics );
@@ -48,7 +50,7 @@ function draw( game ,  gfx ) {
   gfx.clearRect( 0 , 0 , 
     canvas.width , canvas.height );  
   
-  gfx.drawImage( images['world'] , 200 , 200 , 800 , 600,  0 , 0 , canvas.width , canvas.height); 
+  gfx.drawImage( images['world'] , 200 , 200 , 400 , 400 * aspectratio,  0 , 0 , canvas.width , canvas.height); 
   
   
   game['player'] .draw( images['player'] , gfx ); 
